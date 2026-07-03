@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)file:///C:/Users/kholoods/Downloads/index_2.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kholood Jenan Sajid — Backend Software Engineer</title>
+<meta name="description" content="Kholood Jenan Sajid — Backend Software Engineer. Microservices, event-driven systems, Kafka, gRPC.">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./index_files/css2" rel="stylesheet">
+<style>
+  :root{
+    --bg: #FBFAF7;
+    --paper: #F2F0E9;
+    --ink: #1C1B18;
+    --muted: #6F6D64;
+    --line: #DEDACC;
+    --add: #2E7D4F;
+    --add-bg: #E6F0E9;
+    --meta: #6B5FA8;
+    --accent: #34407A;
+    --danger: #B4483A;
+    --max: 760px;
+    --gutter: 44px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a{ color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  a:hover{ color: var(--ink); }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  /* ---------- Top bar ---------- */
+  .topbar{
+    border-bottom: 1px solid var(--line);
+    padding: 14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .topbar .crumb b{ color: var(--ink); }
+  .topbar .status{
+    color: var(--add);
+    border: 1px solid var(--add);
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  /* ---------- Hero / PR header ---------- */
+  .hero{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 24px 32px;
+  }
+  .hero h1{
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: clamp(26px, 4vw, 38px);
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .hero .subtitle{
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 0 26px;
+    max-width: 56ch;
+  }
+  .hero .subtitle strong{ color: var(--ink); font-weight: 600; }
+
+  .diffstat{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  .diffstat .files{ color: var(--ink); font-weight: 600; }
+  .diffstat .ins{ color: var(--add); font-weight: 600; }
+  .diffstat .del{ color: var(--danger); font-weight: 600; }
+  .stat-bar{ display:inline-flex; gap:2px; }
+  .stat-bar span{
+    width: 8px; height: 8px; background: var(--add-bg); border-radius: 1px;
+  }
+  .stat-bar span.on{ background: var(--add); }
+
+  .contact-row{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+  }
+  .contact-row a{ border-bottom: 1px solid var(--line); color: var(--ink); }
+  .contact-row a:hover{ border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- Diff file blocks ---------- */
+  main{ max-width: 900px; margin: 0 auto; padding: 10px 24px 80px; }
+
+  .file{ margin-bottom: 34px; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: var(--bg); }
+
+  .file-header{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    background: var(--paper);
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+  }
+  .file-header .path{ color: var(--ink); font-weight: 600; }
+  .file-header .badge{
+    display:inline-block;
+    margin-left: 8px;
+    font-size: 10.5px;
+    color: var(--add);
+    border: 1px solid var(--add);
+    border-radius: 3px;
+    padding: 0 5px;
+    vertical-align: 1px;
+  }
+
+  .hunk{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--meta);
+    padding: 6px 14px;
+    background: #F6F0FA;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .diff-line{
+    display: grid;
+    grid-template-columns: var(--gutter) 18px 1fr;
+    align-items: start;
+    background: var(--add-bg);
+  }
+  .diff-line .num{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: #9AA79E;
+    text-align: right;
+    padding: 6px 8px 6px 0;
+    user-select: none;
+    border-right: 1px solid #DCE9DF;
+  }
+  .diff-line .plus{
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--add);
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 0;
+  }
+  .diff-line .content{
+    padding: 6px 14px 6px 4px;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  .diff-line .content .k{ color: var(--accent); font-family:'IBM Plex Mono',monospace; font-weight:600; font-size: 13px; }
+  .diff-line .content .v{ color: var(--muted); font-family:'IBM Plex Mono',monospace; font-size: 13px; }
+
+  .diff-line:nth-child(odd){ background: #EAF3EC; }
+
+  .prose .diff-line .content{ font-size: 15px; }
+
+  /* ---------- Footer / merge ---------- */
+  footer{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px 24px 90px;
+  }
+  .merge-box{
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--paper);
+    padding: 26px;
+    text-align:center;
+  }
+  .merge-box p{ color: var(--muted); font-size: 14px; margin: 0 0 16px; }
+  .merge-btn{
+    display:inline-block;
+    background: var(--add);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 26px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    border-bottom: none;
+  }
+  .merge-btn:hover{ background: #24603D; color:#fff; }
+  .footer-links{
+    margin-top: 18px;
+    display:flex;
+    justify-content:center;
+    gap: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+  }
+
+  .fine{
+    text-align:center;
+    color: var(--muted);
+    font-size: 11.5px;
+    margin-top: 22px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 560px){
+    :root{ --gutter: 30px; }
+    .diff-line .content{ font-size: 14px; }
+    .hero{ padding-top: 40px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  .fade-in{ opacity: 0; animation: fadeIn 0.5s ease forwards; }
+  @keyframes fadeIn{ to{ opacity: 1; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="crumb"><b>kholoodjenansajid</b> / portfolio</span>
+  <span class="status">● OPEN</span>
+</div>
+
+<div class="hero">
+  <h1>Backend Software Engineer — open to new roles</h1>
+  <p class="subtitle">
+    Building <strong>event-driven, microservice-based systems</strong> — Java/Spring, Kafka, gRPC —
+    at <strong>99.9% uptime for payment infrastructure</strong>. This page is written like a pull request:
+    every section below is a changed file.
+  </p>
+
+  <div class="diffstat">
+    <span class="files"><span id="statFiles">8</span> files changed</span>
+    <span class="ins">+<span id="statIns">29</span></span>
+    <span class="del">−0</span>
+    <span class="stat-bar" id="statBar"><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span></span>
+  </div>
+
+  <div class="contact-row">
+    <a href="mailto:sjkholood@gmail.com">sjkholood@gmail.com</a>
+    <a href="tel:+918299819282">+91 82998 19282</a>
+    <a href="https://linkedin.com/in/kholoodjenansajid" id="linkedinLink">LinkedIn ↗</a>
+    <a href="https://github.com/KholoodJenanSajid" id="githubLink">GitHub ↗</a>
+  </div>
+</div>
+
+<main id="main"><section class="file fade-in"><div class="file-header">diff --git a/README.md b/README.md <span class="badge">new file</span></div><div class="hunk">@@ -0,0 +1,3 @@</div><div class="prose"><div class="diff-line"><div class="num">1</div><div class="plus">+</div><div class="content">Backend software engineer at Amdocs, working on microservice-based payment infrastructure that stays up 99.9% of the time.</div></div><div class="diff-line"><div class="num">2</div><div class="plus">+</div><div class="content">I define service boundaries, move synchronous calls to Kafka-based event-driven flows, and write the retry logic that keeps failed requests from becoming someone's 2am page.</div></div><div class="diff-line"><div class="num">3</div><div class="plus">+</div><div class="content">B.Tech in Information Technology, 9.6/10 CGPA. 250+ problems solved on LeetCode. Based in India, open to backend / distributed-systems roles.</div></div></div></section><section class="file fade-in"><div class="file-header">diff --git a/experience/amdocs.md b/experience/amdocs.md <span class="badge">Aug 2024 – Present</span></div><div class="hunk">@@ -0,0 +1,8 @@</div><div><div class="diff-line"><div class="num">1</div><div class="plus">+</div><div class="content">Defined microservice domain boundaries for customer management, order management, product catalog, and fulfillment services.</div></div><div class="diff-line"><div class="num">2</div><div class="plus">+</div><div class="content">Migrated synchronous service interactions to Kafka-based event-driven communication, improving scalability and cutting cross-service dependencies — while holding 99.9% uptime for payment infrastructure.</div></div><div class="diff-line"><div class="num">3</div><div class="plus">+</div><div class="content">Added build-validation and security-scanning stages to existing Jenkins CI/CD pipelines, strengthening pre-deployment checks.</div></div><div class="diff-line"><div class="num">4</div><div class="plus">+</div><div class="content">Solved order-fallout issues in Java/Spring services with Kafka-based async processing and retry workflows, reducing manual intervention on failed provisioning requests.</div></div><div class="diff-line"><div class="num">5</div><div class="plus">+</div><div class="content">Worked with architects and downstream OSS teams to define gRPC service contracts and API standards across provisioning, billing, and inventory domains.</div></div><div class="diff-line"><div class="num">6</div><div class="plus">+</div><div class="content">Migrated a data pipeline from Kafka to Snowflake — 40% more processing efficiency, 20% less latency, for real-time payment data flows.</div></div><div class="diff-line"><div class="num">7</div><div class="plus">+</div><div class="content">Built Python automation scripts for migration workflows, cutting manual ETL effort by 10+ hours a week.</div></div><div class="diff-line"><div class="num">8</div><div class="plus">+</div><div class="content">Containerized internal services with Docker; used Prometheus/Grafana dashboards and existing Helm charts to debug pipeline issues.</div></div></div></section><section class="file fade-in"><div class="file-header">diff --git a/experience/let-us-code-systems.md b/experience/let-us-code-systems.md <span class="badge">Jul 2023 – Dec 2023 · Jaipur, Rajasthan</span></div><div class="hunk">@@ -0,0 +1,2 @@</div><div><div class="diff-line"><div class="num">1</div><div class="plus">+</div><div class="content">Built an AI-assisted project management platform (PHP, CodeIgniter 3, MySQL) that improved project efficiency by 30% and cut delays by 20% through automated task prioritization.</div></div><div class="diff-line"><div class="num">2</div><div class="plus">+</div><div class="content">Implemented foreign key constraints across the schema to enforce referential integrity for reliable project tracking across distributed remote teams.</div></div></div></section><section class="file fade-in"><div class="file-header">diff --git a/projects/spring-boot-rest-api.md b/projects/spring-boot-rest-api.md <span class="badge">personal project</span></div><div class="hunk">@@ -0,0 +1,1 @@</div><div><div class="diff-line"><div class="num">1</div><div class="plus">+</div><div class="content">Built a backend REST service in Java/Spring Boot integrating with an external API — handling request routing, response mapping, and error handling for third-party data exchange.</div></div></div></section><section class="file fade-in"><div class="file-header">diff --git a/projects/realtime-analytics-platform.md b/projects/realtime-analytics-platform.md <span class="badge">personal project</span></div><div class="hunk">@@ -0,0 +1,2 @@</div><div><div class="diff-line"><div class="num">1</div><div class="plus">+</div><div class="content">Engineered a multi-threaded C++17 platform for high-volume transaction processing, cutting data-processing latency by 50%.</div></div><div class="diff-line"><div class="num">2</div><div class="plus">+</div><div class="content">Wrote unit tests with Google Test to keep core modules reliable and maintainable.</div></div></div></section><section class="file fade-in"><div class="file-header">diff --git a/skills.json b/skills.json <span class="badge">config</span></div><div class="hunk">@@ -0,0 +1,7 @@</div><div><div class="diff-line"><div class="num">1</div><div class="plus">+</div><div class="content"><span class="k">"languages"</span>: <span class="v">"Java, Python, C++, JavaScript"</span></div></div><div class="diff-line"><div class="num">2</div><div class="plus">+</div><div class="content"><span class="k">"backend"</span>: <span class="v">"Java, Spring (production), gRPC, microservices, event-driven architecture, Spring Boot, Node.js, Express.js, REST APIs"</span></div></div><div class="diff-line"><div class="num">3</div><div class="plus">+</div><div class="content"><span class="k">"cloud_devops"</span>: <span class="v">"Docker, Jenkins, CI/CD, Helm, Prometheus, Grafana"</span></div></div><div class="diff-line"><div class="num">4</div><div class="plus">+</div><div class="content"><span class="k">"data_messaging"</span>: <span class="v">"Kafka, Snowflake, SQL"</span></div></div><div class="diff-line"><div class="num">5</div><div class="plus">+</div><div class="content"><span class="k">"frontend"</span>: <span class="v">"React, TailwindCSS, HTML, CSS, Bootstrap"</span></div></div><div class="diff-line"><div class="num">6</div><div class="plus">+</div><div class="content"><span class="k">"databases"</span>: <span class="v">"MySQL, PostgreSQL"</span></div></div><div class="diff-line"><div class="num">7</div><div class="plus">+</div><div class="content"><span class="k">"tools"</span>: <span class="v">"Git/GitHub, VS Code, Google Test, API integration"</span></div></div></div></section><section class="file fade-in"><div class="file-header">diff --git a/education.md b/education.md <span class="badge">2020 – 2024</span></div><div class="hunk">@@ -0,0 +1,1 @@</div><div><div class="diff-line"><div class="num">1</div><div class="plus">+</div><div class="content">B.Tech in Information Technology — Bharati Vidyapeeth Deemed University, College of Engineering, Pune. 9.6/10 CGPA.</div></div></div></section><section class="file fade-in"><div class="file-header">diff --git a/achievements.md b/achievements.md <span class="badge">ongoing</span></div><div class="hunk">@@ -0,0 +1,5 @@</div><div><div class="diff-line"><div class="num">1</div><div class="plus">+</div><div class="content">250+ problems solved on LeetCode, focused on data structures and algorithms.</div></div><div class="diff-line"><div class="num">2</div><div class="plus">+</div><div class="content">Ranked 3rd of 50+ participants in the flagship 2024 Coding Challenge.</div></div><div class="diff-line"><div class="num">3</div><div class="plus">+</div><div class="content">Rewriting the code — ongoing focus on refactoring for maintainability and performance.</div></div><div class="diff-line"><div class="num">4</div><div class="plus">+</div><div class="content">Member, Women Dev community.</div></div><div class="diff-line"><div class="num">5</div><div class="plus">+</div><div class="content">Certifications: Data Engineering with Python · Microsoft Azure AI Fundamentals.</div></div></div></section></main>
+
+<footer>
+  <div class="merge-box">
+    <p>Reviewing this PR? I'm currently open to backend / distributed-systems roles.</p>
+    <a class="merge-btn" href="mailto:sjkholood@gmail.com?subject=Let%27s%20talk">Merge this PR — Get in touch</a>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:sjkholood@gmail.com">Email</a>
+    <a href="tel:+918299819282">Phone</a>
+    <a href="https://linkedin.com/in/kholoodjenansajid" id="linkedinLink2">LinkedIn</a>
+    <a href="https://github.com/KholoodJenanSajid" id="githubLink2">GitHub</a>
+  </div>
+  <p class="fine">Built with real numbers from the resume, not placeholders. Last updated June 2026.</p>
+</footer>
+
+<script>
+/* ------------------------------------------------------------------
+   Content model — every section is a "file" in the diff, every real
+   bullet/fact is a "+" line. Update this data to update the site.
+   ------------------------------------------------------------------ */
+const files = [
+  {
+    path: "README.md",
+    badge: "new file",
+    hunk: "@@ -0,0 +1,3 @@",
+    prose: true,
+    lines: [
+      "Backend software engineer at Amdocs, working on microservice-based payment infrastructure that stays up 99.9% of the time.",
+      "I define service boundaries, move synchronous calls to Kafka-based event-driven flows, and write the retry logic that keeps failed requests from becoming someone's 2am page.",
+      "B.Tech in Information Technology, 9.6/10 CGPA. 250+ problems solved on LeetCode. Based in India, open to backend / distributed-systems roles."
+    ]
+  },
+  {
+    path: "experience/amdocs.md",
+    badge: "Aug 2024 – Present",
+    hunk: "@@ -0,0 +1,8 @@",
+    lines: [
+      "Defined microservice domain boundaries for customer management, order management, product catalog, and fulfillment services.",
+      "Migrated synchronous service interactions to Kafka-based event-driven communication, improving scalability and cutting cross-service dependencies — while holding 99.9% uptime for payment infrastructure.",
+      "Added build-validation and security-scanning stages to existing Jenkins CI/CD pipelines, strengthening pre-deployment checks.",
+      "Solved order-fallout issues in Java/Spring services with Kafka-based async processing and retry workflows, reducing manual intervention on failed provisioning requests.",
+      "Worked with architects and downstream OSS teams to define gRPC service contracts and API standards across provisioning, billing, and inventory domains.",
+      "Migrated a data pipeline from Kafka to Snowflake — 40% more processing efficiency, 20% less latency, for real-time payment data flows.",
+      "Built Python automation scripts for migration workflows, cutting manual ETL effort by 10+ hours a week.",
+      "Containerized internal services with Docker; used Prometheus/Grafana dashboards and existing Helm charts to debug pipeline issues."
+    ]
+  },
+  {
+    path: "experience/let-us-code-systems.md",
+    badge: "Jul 2023 – Dec 2023 · Jaipur, Rajasthan",
+    hunk: "@@ -0,0 +1,2 @@",
+    lines: [
+      "Built an AI-assisted project management platform (PHP, CodeIgniter 3, MySQL) that improved project efficiency by 30% and cut delays by 20% through automated task prioritization.",
+      "Implemented foreign key constraints across the schema to enforce referential integrity for reliable project tracking across distributed remote teams."
+    ]
+  },
+  {
+    path: "projects/spring-boot-rest-api.md",
+    badge: "personal project",
+    hunk: "@@ -0,0 +1,1 @@",
+    lines: [
+      "Built a backend REST service in Java/Spring Boot integrating with an external API — handling request routing, response mapping, and error handling for third-party data exchange."
+    ]
+  },
+  {
+    path: "projects/realtime-analytics-platform.md",
+    badge: "personal project",
+    hunk: "@@ -0,0 +1,2 @@",
+    lines: [
+      "Engineered a multi-threaded C++17 platform for high-volume transaction processing, cutting data-processing latency by 50%.",
+      "Wrote unit tests with Google Test to keep core modules reliable and maintainable."
+    ]
+  },
+  {
+    path: "skills.json",
+    badge: "config",
+    hunk: "@@ -0,0 +1,7 @@",
+    kv: [
+      ["languages", "Java, Python, C++, JavaScript"],
+      ["backend", "Java, Spring (production), gRPC, microservices, event-driven architecture, Spring Boot, Node.js, Express.js, REST APIs"],
+      ["cloud_devops", "Docker, Jenkins, CI/CD, Helm, Prometheus, Grafana"],
+      ["data_messaging", "Kafka, Snowflake, SQL"],
+      ["frontend", "React, TailwindCSS, HTML, CSS, Bootstrap"],
+      ["databases", "MySQL, PostgreSQL"],
+      ["tools", "Git/GitHub, VS Code, Google Test, API integration"]
+    ]
+  },
+  {
+    path: "education.md",
+    badge: "2020 – 2024",
+    hunk: "@@ -0,0 +1,1 @@",
+    lines: [
+      "B.Tech in Information Technology — Bharati Vidyapeeth Deemed University, College of Engineering, Pune. 9.6/10 CGPA."
+    ]
+  },
+  {
+    path: "achievements.md",
+    badge: "ongoing",
+    hunk: "@@ -0,0 +1,5 @@",
+    lines: [
+      "250+ problems solved on LeetCode, focused on data structures and algorithms.",
+      "Ranked 3rd of 50+ participants in the flagship 2024 Coding Challenge.",
+      "Rewriting the code — ongoing focus on refactoring for maintainability and performance.",
+      "Member, Women Dev community.",
+      "Certifications: Data Engineering with Python · Microsoft Azure AI Fundamentals."
+    ]
+  }
+];
+
+const main = document.getElementById('main');
+let totalLines = 0;
+
+files.forEach(f => {
+  const section = document.createElement('section');
+  section.className = 'file fade-in';
+
+  const header = document.createElement('div');
+  header.className = 'file-header';
+  header.innerHTML = `diff --git a/${f.path} b/${f.path} <span class="badge">${f.badge}</span>`;
+  section.appendChild(header);
+
+  const hunk = document.createElement('div');
+  hunk.className = 'hunk';
+  hunk.textContent = f.hunk;
+  section.appendChild(hunk);
+
+  const body = document.createElement('div');
+  if (f.prose) body.className = 'prose';
+
+  const rows = f.kv
+    ? f.kv.map(([k, v]) => ({ isKV: true, k, v }))
+    : f.lines.map(l => ({ isKV: false, text: l }));
+
+  rows.forEach((row, i) => {
+    totalLines++;
+    const line = document.createElement('div');
+    line.className = 'diff-line';
+    const num = document.createElement('div');
+    num.className = 'num';
+    num.textContent = i + 1;
+    const plus = document.createElement('div');
+    plus.className = 'plus';
+    plus.textContent = '+';
+    const content = document.createElement('div');
+    content.className = 'content';
+    if (row.isKV) {
+      content.innerHTML = `<span class="k">"${row.k}"</span>: <span class="v">"${row.v}"</span>`;
+    } else {
+      content.textContent = row.text;
+    }
+    line.appendChild(num);
+    line.appendChild(plus);
+    line.appendChild(content);
+    body.appendChild(line);
+  });
+
+  section.appendChild(body);
+  main.appendChild(section);
+});
+
+/* diffstat counter */
+const statFiles = document.getElementById('statFiles');
+const statIns = document.getElementById('statIns');
+const statBar = document.getElementById('statBar');
+
+for (let i = 0; i < 10; i++) {
+  const sq = document.createElement('span');
+  if (i < 9) sq.classList.add('on');
+  statBar.appendChild(sq);
+}
+
+function animateCount(el, target, duration) {
+  const start = performance.now();
+  function tick(now) {
+    const p = Math.min(1, (now - start) / duration);
+    el.textContent = Math.round(p * target);
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reduceMotion) {
+  statFiles.textContent = files.length;
+  statIns.textContent = totalLines;
+} else {
+  animateCount(statFiles, files.length, 600);
+  animateCount(statIns, totalLines, 900);
+}
+
+/* fill in real profile links once known — placeholders for now */
+document.querySelectorAll('#linkedinLink, #linkedinLink2').forEach(a => a.href = 'https://linkedin.com/in/kholoodjenansajid');
+document.querySelectorAll('#githubLink, #githubLink2').forEach(a => a.href = 'https://github.com/KholoodJenanSajid');
+</script>
+
+
+
+</body></html>
